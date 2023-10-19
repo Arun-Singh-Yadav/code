@@ -1,0 +1,46 @@
+<table class="align-tbl">
+  <tr>
+    <td><label class="switch">
+        <input type="checkbox" [(ngModel)]="isReturn" (change)="displayDate()">
+        <span class="slider round"></span>
+      </label></td>
+    <td><label #lblTravel> {{lbltext}}</label></td>
+  </tr>
+
+  <tr>
+    <td> <label>Source:</label></td>
+    <td><select #sourceLocation (change)='onSourceSelected(sourceLocation.value)'>
+        <option *ngFor="let source of sourceList" value={{source.code}}>{{source.name}}</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><label> Destination:</label></td>
+    <td><select #destinationLocation (change)="onDestinationSelected(destinationLocation.value)">
+        <option *ngFor="let destinaton of destinationList" value={{destinaton.code}}>{{destinaton.name}}</option>
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <td><label>Journy Date:</label></td>
+    <td>
+      <input type="date" id="journyDate" value="2023-12-31">
+    </td>
+  </tr>
+  <tr *ngIf="isReturn">
+    <td><label>Return Date:</label></td>
+    <td>
+      <input type="date" id="returnDate" value="2024-01-01">
+    </td>
+  </tr>
+
+</table>
+
+<button type="button" (click)="OnSearchClck()">
+Search
+</button>
+
+<br>
+<br>
+<app-output-component *ngIf="isSearchClicked" [source]="selectedSource" [destination]="selectedDestination" [journyType]="lbltext"></app-output-component>
